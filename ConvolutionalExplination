@@ -8,3 +8,10 @@ For example for a 7x7 input and a 3x3 filter with stride 1 and pad 0 we would ge
 Lets also see one more graphical example:
 
 
+Constraints on strides. Note again that the spatial arrangement hyperparameters have mutual constraints. For example, when the input has
+size W=10W=10, no zero-padding is used P=0P=0, and the filter size is F=3F=3, then it would be impossible to use stride S=2S=2,
+since (W−F+2P)/S+1=(10−3+0)/2+1=4.5(W−F+2P)/S+1=(10−3+0)/2+1=4.5, i.e. not an integer, indicating that the neurons don’t “fit” neatly
+and symmetrically across the input. Therefore, this setting of the hyperparameters is considered to be invalid, and a ConvNet library
+could throw an exception or zero pad the rest to make it fit, or crop the input to make it fit, or something. As we will see in the
+ConvNet architectures section, sizing the ConvNets appropriately so that all the dimensions “work out” can be a real headache, which
+the use of zero-padding and some design guidelines will significantly alleviate.
